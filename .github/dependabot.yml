@@ -1,0 +1,16 @@
+# Example configuration file that:
+#  - Ignores lodash dependency
+#  - Disables version-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    ignore:
+      # For Lodash, ignore all updates
+      - dependency-name: "lodash"
+    # Disable version updates for npm dependencies
+    enable-beta-ecosystems: true
+    target-branch: master
