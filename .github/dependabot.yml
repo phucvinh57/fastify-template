@@ -12,5 +12,4 @@ updates:
       # For Lodash, ignore all updates
       - dependency-name: "lodash"
     # Disable version updates for npm dependencies
-    enable-beta-ecosystems: true
     target-branch: master
