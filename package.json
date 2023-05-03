@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc --project tsconfig.compile.json && tsc-alias",
-    "barrels": "barrelsby --config .barrelsby.json",
+    "barrels": "barrelsby --config .barrelsby.json -q",
     "start": "yarn barrels && cross-env NODE_ENV=development tsnd --ignore-watch node_modules --respawn --transpile-only --max-old-space-size=2048 -r tsconfig-paths/register src/index.ts",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests",
     "db:migrate": "npx prisma migrate dev",
