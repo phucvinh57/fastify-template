@@ -1,0 +1,48 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "sourceRoot": "src",
+        "outDir": "dist",
+        "module": "CommonJS",
+        "target": "ESNext",
+        "allowJs": true,
+        "sourceMap": true,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "suppressImplicitAnyIndexErrors": false,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "allowSyntheticDefaultImports": true,
+        "importHelpers": true,
+        "newLine": "LF",
+        "noEmit": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "lib": ["ESNext", "dom", "ESNext.AsyncIterable"],
+        "typeRoots": ["./node_modules/@types"],
+        "paths": {
+            "@handlers": ["src/handlers"],
+            "@constants": ["src/constants"],
+            "@services": ["src/services"],
+            "@dtos/in": ["src/dtos/in"],
+            "@dtos/out": ["src/dtos/out"],
+            "@dtos/common": ["src/dtos/common.dto"],
+            "@configs": ["src/configs"],
+            "@configs/*": ["src/configs/*"],
+            "@repositories": ["src/repositories"],
+            "@utils": ["src/utils"],
+            "@middlewares": ["src/middlewares"],
+            "@interfaces": ["src/interfaces"],
+        }
+    },
+    "include": ["src", "**/*.js", "**/*.ts", "test"],
+    "exclude": ["node_modules", "dist", "coverage"],
+    "linterOptions": {
+        "exclude": []
+    }
+}

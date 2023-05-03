@@ -1,0 +1,31 @@
+version: "3.5"
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    restart: always
+
+  fastify:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: ghcr.io/phucvinh57/fastify-template:0.1.0
+    container_name: fastify_template
+    ports:
+      - 8080:8080
+    volumes:
+      - .env:/app/.env
+    depends_on:
+      - postgres
+    restart: always
+  
+volumes:
+  postgres_db:

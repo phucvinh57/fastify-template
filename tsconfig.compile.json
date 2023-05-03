@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "dist",
+        "sourceRoot": "src",
+        "moduleResolution": "node",
+        "noResolve": false,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "noEmit": false,
+        "emitDeclarationOnly": false,
+        "inlineSources": true
+    },
+    "exclude": ["**/*.spec.ts", "prisma", "**/*.test.ts", "**/*.config.js", "node_modules", "dist", "coverage"]
+}

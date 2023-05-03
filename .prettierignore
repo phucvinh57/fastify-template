@@ -1,0 +1,10 @@
+dist
+docs
+node_modules
+*-lock.json
+*.lock
+*.yaml
+*.yml
+*.json
+*.md
+coverage
