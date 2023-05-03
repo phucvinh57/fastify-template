@@ -24,15 +24,7 @@ For applying conventional commits, refer [commitizen](https://github.com/commiti
 ## Commands
 
 Note: Fill in `.env` file (use template from `.env.example`) before starts.
-    "lint": "eslint '**/*.{ts,js}'",
-    "lint:fix": "eslint '**/*.{ts,js}' --fix",
-    "format": "prettier '**/*.{ts,js,json}' --write",
-    "prepare": "is-ci || husky install",
-    "bootstrap": "yarn start:docker && yarn && yarn db:migrate && npx prisma db seed",
-    "start:docker": "docker-compose -f docker-compose.dev.yml up -d",
-    "clean:docker": "docker-compose -f docker-compose.dev.yml down --volumes --remove-orphans",
-    "clean:git": "git branch --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs git branch -D </tmp/merged-branches && git fetch --prune --all"
-   -->
+
 - `yarn bootstrap`: Set up development
 - `yarn barrels`: Gather export objects from many files in a folder and re-export in `index.ts` file. See configs in `.barrelsby.json`.
 - `yarn start`: Start application in dev mode
