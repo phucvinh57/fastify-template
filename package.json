@@ -42,7 +42,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.0",
     "@types/jsonwebtoken": "^9.0.1",
-    "@types/node": "^18.14.4",
+    "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
     "barrelsby": "^2.5.1",
