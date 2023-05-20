@@ -12,4 +12,5 @@ updates:
       # For Lodash, ignore all updates
       - dependency-name: "lodash"
     # Disable version updates for npm dependencies
-    target-branch: deps
+    open-pull-requests-limit: 0
+    target-branch: master
