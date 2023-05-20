@@ -28,10 +28,6 @@ jobs:
           release-type: node
           pull-request-header: "Bot (:robot:) requested to create a new release on ${{ github.ref_name }}"
       
-      - name: Print step.release.outputs
-        run: |
-          echo '${{ toJson(steps.release.outputs) }}'
-      
       - name: Check for new release or create PR
         id: checking-release
         run: |
