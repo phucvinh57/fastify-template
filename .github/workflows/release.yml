@@ -22,27 +22,14 @@ jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
-      build: ${{ steps.checking-release.outputs.build }}
-      tag_name: ${{ steps.checking-release.outputs.tag_name }}
+      build: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
           pull-request-header: "Bot (:robot:) requested to create a new release on ${{ github.ref_name }}"
-
-      - name: Check for new release or create PR
-        id: checking-release
-        run: |
-          if [ ${{ steps.release.outputs.release_created == 'true' }} ]; then
-            echo "build=true" >> $GITHUB_OUTPUT
-            echo "tag_name=${{ steps.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
-          else
-            echo "build=false" >> $GITHUB_OUTPUT
-          fi
-      - name: Log outputs
-        run: |
-          echo '${{ toJson(steps.checking-release) }}'
 
   build:
     name: Build
