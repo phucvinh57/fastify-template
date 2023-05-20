@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/phucvinh57/fastify-template/compare/v1.0.0...v1.0.1) (2023-05-20)
+
+
+### Bug Fixes
+
+* **dependabot.yml:** disable version updates for npm dependencies ([a003e1a](https://github.com/phucvinh57/fastify-template/commit/a003e1a6db73adfc606eda32a1cb67b63eaab817))
+
 ## 1.0.0 (2023-05-20)
 
 
