@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/phucvinh57/fastify-template/compare/v1.0.1...v1.1.0) (2023-05-20)
+
+
+### Features
+
+* add bot's PR header ([062e6ec](https://github.com/phucvinh57/fastify-template/commit/062e6ec4894483b7557e0bfc32fe9bf10e3272c3))
+
 ## [1.0.1](https://github.com/phucvinh57/fastify-template/compare/v1.0.0...v1.0.1) (2023-05-20)
 
 
