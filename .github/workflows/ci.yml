@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - '.husky/**'
       - '**.md'
+      - 'package.json'
 jobs:
   test:
     name: Test
