@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/phucvinh57/fastify-template/compare/v1.2.3...v1.2.4) (2023-05-20)
+
+
+### Bug Fixes
+
+* **release.yml:** good fix ([ca14e0f](https://github.com/phucvinh57/fastify-template/commit/ca14e0f2a8489f5c6ff70d9518862a193714da9c))
+
 ## [1.2.3](https://github.com/phucvinh57/fastify-template/compare/v1.2.2...v1.2.3) (2023-05-20)
 
 
