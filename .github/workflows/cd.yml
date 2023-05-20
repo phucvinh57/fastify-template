@@ -3,6 +3,10 @@ name: CD
 on:
   push:
     branches: ["master"]
+    # See docs at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-excluding-paths
+    paths-ignore:
+      - '.husky/**'
+      - '**.md'
 
 env:
   # Use docker.io for Docker Hub if empty

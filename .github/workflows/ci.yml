@@ -3,7 +3,10 @@ name: CI
 on:
   pull_request:
     branches: ["master"]
-
+    # See docs at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-excluding-paths
+    paths-ignore:
+      - '.husky/**'
+      - '**.md'
 jobs:
   test:
     name: Test
