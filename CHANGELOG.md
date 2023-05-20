@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/phucvinh57/fastify-template/compare/v1.1.0...v1.2.0) (2023-05-20)
+
+
+### Features
+
+* **ci:** adapt new ci workflows ([89ec5dc](https://github.com/phucvinh57/fastify-template/commit/89ec5dc4ae68bf9575cff6cb62d929e499a4056d))
+
 ## [1.1.0](https://github.com/phucvinh57/fastify-template/compare/v1.0.1...v1.1.0) (2023-05-20)
 
 
