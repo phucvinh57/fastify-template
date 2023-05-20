@@ -21,13 +21,16 @@ name: Release and deploy
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.checking-release.outputs.build }}
+      tag_name: ${{ steps.checking-release.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
           pull-request-header: "Bot (:robot:) requested to create a new release on ${{ github.ref_name }}"
-      
+
       - name: Check for new release or create PR
         id: checking-release
         run: |
@@ -45,7 +48,7 @@ jobs:
     name: Build
     needs: [release]
     runs-on: ubuntu-latest
-    if: needs.release.outputs.build == 'true'
+    if: ${{ needs.release.outputs.build == 'true' }}
     steps:
       - uses: actions/checkout@v3
         name: Checkout repository
