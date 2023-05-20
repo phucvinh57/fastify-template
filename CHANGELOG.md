@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/phucvinh57/fastify-template/compare/v1.2.0...v1.2.1) (2023-05-20)
+
+
+### Bug Fixes
+
+* github actions cannot read `release` job's outputs ([7264e4f](https://github.com/phucvinh57/fastify-template/commit/7264e4f2b6108da4d29c257db3462ebb47d994f9))
+
 ## [1.2.0](https://github.com/phucvinh57/fastify-template/compare/v1.1.0...v1.2.0) (2023-05-20)
 
 
