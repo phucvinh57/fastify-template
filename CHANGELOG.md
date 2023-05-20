@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/phucvinh57/fastify-template/compare/v1.2.2...v1.2.3) (2023-05-20)
+
+
+### Bug Fixes
+
+* **release.yml:** fuking shit ([6e70795](https://github.com/phucvinh57/fastify-template/commit/6e70795d971c66467b435441045bcb209ca312b0))
+
 ## [1.2.2](https://github.com/phucvinh57/fastify-template/compare/v1.2.1...v1.2.2) (2023-05-20)
 
 
