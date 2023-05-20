@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/phucvinh57/fastify-template/compare/v1.2.1...v1.2.2) (2023-05-20)
+
+
+### Bug Fixes
+
+* **ci:** remove print release step outputs ([a1c7bb4](https://github.com/phucvinh57/fastify-template/commit/a1c7bb40424df6e5265d13f1fc5dbd7d4929fdc7))
+
 ## [1.2.1](https://github.com/phucvinh57/fastify-template/compare/v1.2.0...v1.2.1) (2023-05-20)
 
 
