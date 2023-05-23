@@ -9,7 +9,12 @@ export function createPlugin(swaggerTags: HandlerTag[], routesOptions: RouteOpti
                 schema: {
                     ...options.schema,
                     tags: swaggerTags
-                }
+                },
+                /**
+                 * True by default. See https://www.fastify.io/docs/latest/Reference/Server/#exposeHeadRoutes
+                 * About HEAD http method: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
+                 */
+                exposeHeadRoute: false
             });
         });
     };
