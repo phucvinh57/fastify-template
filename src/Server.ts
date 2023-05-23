@@ -29,7 +29,6 @@ export function createServer(config: ServerConfig) {
 
     app.ready().then(() => {
         app.swagger({ yaml: true });
-        // kafkaAdmin.connect().then(() => app.log.info("Kakfa admin connected"));
         app.log.info(`Swagger documentation is on http://${config.host}:${config.port}/docs`);
     });
 
