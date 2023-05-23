@@ -1,9 +1,10 @@
 import { USER_NOT_FOUND } from '@constants';
 import { prisma } from '@repositories';
 import { UserDto } from '@dtos/out';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply } from 'fastify';
+import { AuthRequest } from '@interfaces';
 
-async function getUserById(request: FastifyRequest<{ Headers: { userId: string } }>, reply: FastifyReply): Result<UserDto> {
+async function getUserById(request: AuthRequest, reply: FastifyReply): Result<UserDto> {
     const userId: string = request.headers.userId;
     const user = await prisma.user.findUnique({
         select: {
