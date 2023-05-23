@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/phucvinh57/fastify-template/compare/v1.2.4...v1.3.0) (2023-05-23)
+
+
+### Features
+
+* **request:** write custom type for authenticated request ([9340448](https://github.com/phucvinh57/fastify-template/commit/93404484bc99fd679eec7089ce4c2cf74f946e02))
+
+
+### Bug Fixes
+
+* **routes:** disable exposing HEAD route for each GET method ([5825529](https://github.com/phucvinh57/fastify-template/commit/5825529ee30acfeb18504ea32a128098480b31b8))
+
 ## [1.2.4](https://github.com/phucvinh57/fastify-template/compare/v1.2.3...v1.2.4) (2023-05-20)
 
 
