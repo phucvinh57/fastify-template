@@ -31,37 +31,39 @@ jobs:
           release-type: node
           pull-request-header: "Bot (:robot:) requested to create a new release on ${{ github.ref_name }}"
 
-  build:
-    name: Build
-    needs: [release]
-    runs-on: ubuntu-latest
-    if: ${{ needs.release.outputs.build == 'true' }}
-    steps:
-      - uses: actions/checkout@v3
-        name: Checkout repository
+  ## Use if need to build package
+  # build:
+  #   name: Build
+  #   needs: [release]
+  #   runs-on: ubuntu-latest
+  #   if: ${{ needs.release.outputs.build == 'true' }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       name: Checkout repository
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+  #     - name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v2
 
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v2
-        with:
-          version: v0.9.1
+  #     - name: Setup Docker buildx
+  #       uses: docker/setup-buildx-action@v2
+  #       with:
+  #         version: v0.9.1
 
-      - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ env.CD_USERNAME }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Log into registry ${{ env.REGISTRY }}
+  #       uses: docker/login-action@v2
+  #       with:
+  #         registry: ${{ env.REGISTRY }}
+  #         username: ${{ env.CD_USERNAME }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.tag_name }}
+  #     - name: Build and push
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: .
+  #         push: true
+  #         tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.release.outputs.tag_name }}
 
+  ## Use if need to deploy on a server
   # deploy:
   #   name: Deploy
   #   runs-on: ubuntu-latest
