@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/phucvinh57/fastify-template/compare/v1.3.0...v1.4.0) (2023-06-07)
+
+
+### Features
+
+* **envs:** add validations using `envalid` ([4cfff3e](https://github.com/phucvinh57/fastify-template/commit/4cfff3eeb0b5e77a8d0c8ec460a3164e1a56c158))
+
 ## [1.3.0](https://github.com/phucvinh57/fastify-template/compare/v1.2.4...v1.3.0) (2023-05-23)
 
 
