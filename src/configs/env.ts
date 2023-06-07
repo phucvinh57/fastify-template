@@ -1,7 +1,16 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { config as configEnv } from 'dotenv';
+import { str, cleanEnv } from 'envalid';
 
-export const ENVIRONMENT = !process.env.NODE_ENV ? 'development' : (process.env.NODE_ENV as Environment);
-export const JWT_SECRET = process.env.JWT_SECRET as string;
-export const COOKIE_SECRET = process.env.COOKIE_SECRET as string;
-export const CORS_WHITE_LIST = process.env.CORS_WHITE_LIST === undefined ? [] : process.env.CORS_WHITE_LIST.split(',');
+configEnv();
+
+export const envs = cleanEnv(process.env, {
+    NODE_ENV: str<Environment>({
+        devDefault: 'development',
+        choices: ['development', 'test', 'production', 'staging']
+    }),
+    JWT_SECRET: str(),
+    COOKIE_SECRET: str(),
+    CORS_WHITE_LIST: str()
+});
+
+export const CORS_WHITE_LIST = envs.CORS_WHITE_LIST.split(',');

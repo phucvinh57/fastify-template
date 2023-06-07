@@ -3,7 +3,7 @@ import { compare, hash } from 'bcrypt';
 import { prisma } from '@repositories';
 import { cookieOptions, DUPLICATED_EMAIL, LOGIN_FAIL, SALT_ROUNDS, USER_NOT_FOUND } from '@constants';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '@configs';
+import { envs } from '@configs';
 import { User } from '@prisma/client';
 import { AuthInputDto } from '@dtos/in';
 import { AuthResultDto } from '@dtos/out';
@@ -22,7 +22,7 @@ async function login(request: FastifyRequest<{ Body: AuthInputDto }>, reply: Fas
     const correctPassword = await compare(request.body.password, user.password);
     if (!correctPassword) return reply.badRequest(LOGIN_FAIL);
 
-    const userToken = jwt.sign({ userId: user.id }, JWT_SECRET);
+    const userToken = jwt.sign({ userId: user.id }, envs.JWT_SECRET);
     reply.setCookie('token', userToken, cookieOptions);
 
     return {
@@ -45,7 +45,7 @@ async function signup(request: FastifyRequest<{ Body: AuthInputDto }>, reply: Fa
         return reply.badRequest(DUPLICATED_EMAIL);
     }
 
-    const userToken = jwt.sign({ userId: user.id }, JWT_SECRET);
+    const userToken = jwt.sign({ userId: user.id }, envs.JWT_SECRET);
     reply.setCookie('token', userToken, cookieOptions);
 
     return {

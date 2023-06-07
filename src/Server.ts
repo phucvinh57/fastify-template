@@ -1,10 +1,10 @@
 import fastify from 'fastify';
 import type { FastifyCookieOptions } from '@fastify/cookie';
-import { COOKIE_SECRET, CORS_WHITE_LIST, ENVIRONMENT, loggerConfig, swaggerConfig, swaggerUIConfig } from '@configs';
+import { CORS_WHITE_LIST, envs, loggerConfig, swaggerConfig, swaggerUIConfig } from '@configs';
 import { apiPlugin, authPlugin } from './plugins';
 
 export function createServer(config: ServerConfig) {
-    const app = fastify({ logger: loggerConfig[ENVIRONMENT] });
+    const app = fastify({ logger: loggerConfig[envs.NODE_ENV] });
     global.logger = app.log;
 
     app.register(import('@fastify/sensible'));
@@ -14,12 +14,12 @@ export function createServer(config: ServerConfig) {
     });
 
     app.register(import('@fastify/cookie'), {
-        secret: COOKIE_SECRET, // for cookies signature
+        secret: envs.COOKIE_SECRET, // for cookies signature
         hook: 'onRequest'
     } as FastifyCookieOptions);
 
     // Swagger on production will be turned off in the future
-    if (ENVIRONMENT === 'development' || ENVIRONMENT === 'staging' || ENVIRONMENT === 'production') {
+    if (envs.NODE_ENV === 'development' || envs.NODE_ENV === 'staging' || envs.NODE_ENV === 'production') {
         app.register(import('@fastify/swagger'), swaggerConfig);
         app.register(import('@fastify/swagger-ui'), swaggerUIConfig);
     }
