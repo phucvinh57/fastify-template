@@ -1,8 +1,8 @@
-import { FastifyError, FastifyLoggerOptions } from 'fastify';
+import { FastifyError } from 'fastify';
 import { PinoLoggerOptions } from 'fastify/types/logger';
 
 const errorSerialize = (err: FastifyError) => {
-    const isInternalServerError = !err.statusCode || (err.statusCode && err.statusCode);
+    const isInternalServerError = !err.statusCode || err.statusCode >= 500;
     return {
         type: err.name,
         stack: isInternalServerError && err.stack ? err.stack : 'null',
@@ -11,7 +11,7 @@ const errorSerialize = (err: FastifyError) => {
     };
 };
 
-export const loggerConfig: Record<Environment, boolean | (FastifyLoggerOptions & PinoLoggerOptions)> = {
+export const loggerConfig: Record<NodeEnv, PinoLoggerOptions> = {
     development: {
         transport: {
             target: 'pino-pretty',
@@ -22,16 +22,22 @@ export const loggerConfig: Record<Environment, boolean | (FastifyLoggerOptions &
         },
         serializers: { err: errorSerialize }
     },
-    staging: {
-        transport: {
-            target: 'pino-pretty',
-            options: {
-                translateTime: 'dd/mm/yy HH:MM:ss',
-                ignore: 'pid,hostname'
-            }
-        },
+    test: {
         serializers: { err: errorSerialize }
     },
-    production: { serializers: { err: errorSerialize } },
-    test: false
+    // In production, save log to files.
+    // Can write a plugin to use centralize logging services, if need
+    production: {
+        transport: {
+            targets: ['info', 'warn', 'error', 'fatal'].map((logLevel) => ({
+                target: 'pino/file',
+                level: logLevel,
+                options: {
+                    destination: process.cwd() + `/logs/${logLevel}.log`,
+                    mkdir: true
+                }
+            }))
+        },
+        serializers: { err: errorSerialize }
+    }
 };

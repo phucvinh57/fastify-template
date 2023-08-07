@@ -1,7 +1,11 @@
-import { FastifyBaseLogger } from 'fastify';
+import 'fastify';
 
-declare global {
-    // eslint-disable-next-line no-var
-    var logger: FastifyBaseLogger;
+declare module 'fastify' {
+    interface FastifyRequest {
+        userId: string;
+    }
+    interface FastifyInstance {
+        start: () => Promise<void>;
+        shutdown: () => Promise<void>;
+    }
 }
-export {};

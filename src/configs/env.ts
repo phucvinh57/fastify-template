@@ -4,9 +4,9 @@ import { str, cleanEnv } from 'envalid';
 configEnv();
 
 export const envs = cleanEnv(process.env, {
-    NODE_ENV: str<Environment>({
+    NODE_ENV: str<NodeEnv>({
         devDefault: 'development',
-        choices: ['development', 'test', 'production', 'staging']
+        choices: ['development', 'test', 'production']
     }),
     JWT_SECRET: str(),
     COOKIE_SECRET: str(),

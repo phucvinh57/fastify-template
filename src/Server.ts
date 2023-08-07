@@ -1,11 +1,10 @@
-import fastify from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import type { FastifyCookieOptions } from '@fastify/cookie';
-import { CORS_WHITE_LIST, envs, loggerConfig, swaggerConfig, swaggerUIConfig } from '@configs';
-import { apiPlugin, authPlugin } from './plugins';
+import { CORS_WHITE_LIST, customErrorHandler, envs, loggerConfig, swaggerConfig, swaggerUIConfig } from '@configs';
+import { apiPlugin, authPlugin } from './routes';
 
-export function createServer(config: ServerConfig) {
+export function createServer(config: ServerConfig): FastifyInstance {
     const app = fastify({ logger: loggerConfig[envs.NODE_ENV] });
-    global.logger = app.log;
 
     app.register(import('@fastify/sensible'));
     app.register(import('@fastify/helmet'));
@@ -19,7 +18,7 @@ export function createServer(config: ServerConfig) {
     } as FastifyCookieOptions);
 
     // Swagger on production will be turned off in the future
-    if (envs.NODE_ENV === 'development' || envs.NODE_ENV === 'staging' || envs.NODE_ENV === 'production') {
+    if (envs.isDev) {
         app.register(import('@fastify/swagger'), swaggerConfig);
         app.register(import('@fastify/swagger-ui'), swaggerUIConfig);
     }
@@ -27,31 +26,27 @@ export function createServer(config: ServerConfig) {
     app.register(authPlugin, { prefix: '/auth' });
     app.register(apiPlugin, { prefix: '/api' });
 
-    app.ready().then(() => {
-        app.swagger({ yaml: true });
-        app.log.info(`Swagger documentation is on http://${config.host}:${config.port}/docs`);
-    });
+    app.setErrorHandler(customErrorHandler);
 
-    const listen = () => {
-        app.listen(
-            {
-                host: config.host,
-                port: config.port
-            },
-            function (err) {
-                if (err) {
-                    app.log.error(err);
-                }
-            }
-        );
-        process.on('SIGINT', () => {
-            app.log.info('Exited program');
-            process.exit(0);
+    const shutdown = async () => {
+        await app.close();
+    };
+
+    const start = async () => {
+        await app.listen({
+            host: config.host,
+            port: config.port
         });
+        await app.ready();
+        if (!envs.isProd) {
+            app.swagger({ yaml: true });
+            app.log.info(`Swagger documentation is on http://${config.host}:${config.port}/docs`);
+        }
     };
 
     return {
         ...app,
-        listen
+        start,
+        shutdown
     };
 }

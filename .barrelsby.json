@@ -5,8 +5,7 @@
         "./src/dtos/in",
         "./src/dtos/out",
         "./src/configs",
-        "./src/middlewares",
-        "./src/services",
+        "./src/hooks",
         "./src/interfaces",
         "./src/repositories",
         "./src/utils"

@@ -15,7 +15,7 @@ module.exports = {
     coverageDirectory: 'coverage',
 
     // An array of regexp pattern strings used to skip coverage collection
-    coveragePathIgnorePatterns: ['index.ts', '/node_modules/'],
+    coveragePathIgnorePatterns: ['index.ts', '/node_modules/', 'dist'],
 
     // An object that configures minimum threshold enforcement for coverage results
     coverageThreshold: {
@@ -40,12 +40,14 @@ module.exports = {
         '\\.(ts)$': 'ts-jest'
     },
     moduleNameMapper: {
-        '@services': 'src/services',
-        '@configs': 'src/configs',
+        '@services': '<rootDir>/src/services',
+        '@configs': '<rootDir>/src/configs',
         '@constants': '<rootDir>/src/constants',
         '@dtos/common': '<rootDir>/src/dtos/common.dto.ts',
         '@dtos/in': '<rootDir>/src/dtos/in',
         '@dtos/out': '<rootDir>/src/dtos/out',
+        '@hooks': '<rootDir>/src/hooks',
+        '@routes': '<rootDir>/src/routes',
         '@utils': '<rootDir>/src/utils.ts'
     },
     roots: ['<rootDir>'],

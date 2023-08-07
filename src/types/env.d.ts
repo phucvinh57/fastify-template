@@ -1,1 +1,1 @@
-type Environment = 'development' | 'staging' | 'production' | 'test';
+type NodeEnv = 'development' | 'production' | 'test';

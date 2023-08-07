@@ -1,4 +1,3 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
 import { compare, hash } from 'bcrypt';
 import { prisma } from '@repositories';
 import { cookieOptions, DUPLICATED_EMAIL, LOGIN_FAIL, SALT_ROUNDS, USER_NOT_FOUND } from '@constants';
@@ -7,52 +6,53 @@ import { envs } from '@configs';
 import { User } from '@prisma/client';
 import { AuthInputDto } from '@dtos/in';
 import { AuthResultDto } from '@dtos/out';
+import { Handler } from '@interfaces';
 
-async function login(request: FastifyRequest<{ Body: AuthInputDto }>, reply: FastifyReply): Result<AuthResultDto> {
+const login: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) => {
     const user = await prisma.user.findUnique({
         select: {
             id: true,
             email: true,
             password: true
         },
-        where: { email: request.body.email }
+        where: { email: req.body.email }
     });
-    if (!user) return reply.badRequest(USER_NOT_FOUND);
+    if (!user) return res.badRequest(USER_NOT_FOUND);
 
-    const correctPassword = await compare(request.body.password, user.password);
-    if (!correctPassword) return reply.badRequest(LOGIN_FAIL);
+    const correctPassword = await compare(req.body.password, user.password);
+    if (!correctPassword) return res.badRequest(LOGIN_FAIL);
 
     const userToken = jwt.sign({ userId: user.id }, envs.JWT_SECRET);
-    reply.setCookie('token', userToken, cookieOptions);
+    res.setCookie('token', userToken, cookieOptions);
 
     return {
         id: user.id,
         email: user.email
     };
-}
+};
 
-async function signup(request: FastifyRequest<{ Body: AuthInputDto }>, reply: FastifyReply): Promise<AuthResultDto | void> {
-    const hashPassword = await hash(request.body.password, SALT_ROUNDS);
+const signup: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) => {
+    const hashPassword = await hash(req.body.password, SALT_ROUNDS);
     let user: User;
     try {
         user = await prisma.user.create({
             data: {
-                email: request.body.email,
+                email: req.body.email,
                 password: hashPassword
             }
         });
     } catch (err) {
-        return reply.badRequest(DUPLICATED_EMAIL);
+        return res.badRequest(DUPLICATED_EMAIL);
     }
 
     const userToken = jwt.sign({ userId: user.id }, envs.JWT_SECRET);
-    reply.setCookie('token', userToken, cookieOptions);
+    res.setCookie('token', userToken, cookieOptions);
 
     return {
         id: user.id,
         email: user.email
     };
-}
+};
 
 export const authHandler = {
     login,
