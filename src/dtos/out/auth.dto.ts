@@ -1,9 +1,9 @@
-import { idSchema } from '@dtos/common';
-import s from 'fluent-json-schema';
+import { ObjectId } from '@dtos/common';
+import { Static, Type } from '@sinclair/typebox';
 
-export const authResultSchema = s.object().prop('id', idSchema).prop('email', s.string());
+export const AuthResultDto = Type.Object({
+    id: ObjectId,
+    email: Type.String({ format: 'email' })
+});
 
-export type AuthResultDto = {
-    id: string;
-    email: string;
-};
+export type AuthResultDto = Static<typeof AuthResultDto>;

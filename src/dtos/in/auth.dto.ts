@@ -1,12 +1,11 @@
 import { MIN_EMAIL_LENGTH, MIN_PASSWORD_LENGTH } from '@constants';
-import s from 'fluent-json-schema';
+import { Static, Type } from '@sinclair/typebox';
 
-export const authInputSchema = s
-    .object()
-    .prop('email', s.string().required().minLength(MIN_EMAIL_LENGTH))
-    .prop('password', s.string().required().minLength(MIN_PASSWORD_LENGTH));
+// See https://github.com/sinclairzx81/typebox
 
-export type AuthInputDto = {
-    email: string;
-    password: string;
-};
+export const AuthInputDto = Type.Object({
+    email: Type.String({ minLength: MIN_EMAIL_LENGTH }),
+    password: Type.String({ minLength: MIN_PASSWORD_LENGTH })
+});
+
+export type AuthInputDto = Static<typeof AuthInputDto>;

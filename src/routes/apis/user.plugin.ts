@@ -1,4 +1,4 @@
-import { userSchema } from '@dtos/out';
+import { UserDto } from '@dtos/out';
 import { usersHandler } from '@handlers';
 import { createRoutes } from '@utils';
 
@@ -8,7 +8,7 @@ export const userPlugin = createRoutes('User', [
         url: '',
         schema: {
             response: {
-                200: userSchema
+                200: UserDto
             }
         },
         handler: usersHandler.getUserById

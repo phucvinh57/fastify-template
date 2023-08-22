@@ -1,5 +1,9 @@
 import { ID_LENGTH } from '@constants';
-import s from 'fluent-json-schema';
+import { Static, Type } from '@sinclair/typebox';
 
-export const idSchema = s.string().minLength(ID_LENGTH).maxLength(ID_LENGTH);
-export const nullable = { nullable: true };
+export const ObjectId = Type.String({
+    minLength: ID_LENGTH,
+    maxLength: ID_LENGTH
+});
+
+export type ObjectId = Static<typeof ObjectId>;

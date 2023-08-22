@@ -31,11 +31,11 @@
     "@fastify/swagger": "^8.8.0",
     "@fastify/swagger-ui": "^1.9.3",
     "@prisma/client": "^5.1.1",
+    "@sinclair/typebox": "^0.31.1",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.3.1",
     "envalid": "^7.3.1",
     "fastify": "^4.21.0",
-    "fluent-json-schema": "^4.1.1",
     "jsonwebtoken": "^9.0.1",
     "prisma": "^5.1.1"
   },

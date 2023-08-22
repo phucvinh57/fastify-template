@@ -1,6 +1,6 @@
+import { AuthInputDto } from '@dtos/in';
+import { AuthResultDto } from '@dtos/out';
 import { authHandler } from '@handlers';
-import { authInputSchema } from '@dtos/in';
-import { authResultSchema } from '@dtos/out';
 import { createRoutes } from '@utils';
 
 export const authPlugin = createRoutes('Auth', [
@@ -8,9 +8,9 @@ export const authPlugin = createRoutes('Auth', [
         method: 'POST',
         url: '/login',
         schema: {
-            body: authInputSchema,
+            body: AuthInputDto,
             response: {
-                200: authResultSchema
+                200: AuthResultDto
             }
         },
         handler: authHandler.login
@@ -19,9 +19,9 @@ export const authPlugin = createRoutes('Auth', [
         method: 'POST',
         url: '/signup',
         schema: {
-            body: authInputSchema,
+            body: AuthInputDto,
             response: {
-                200: authResultSchema
+                200: AuthResultDto
             }
         },
         handler: authHandler.signup
