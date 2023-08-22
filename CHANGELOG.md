@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/phucvinh57/fastify-template/compare/v1.4.0...v1.5.0) (2023-08-07)
+
+
+### Features
+
+* update template structures & code quality ([114ed2e](https://github.com/phucvinh57/fastify-template/commit/114ed2ec65f5006ead6758e56d0b869211d943ee))
+
 ## [1.4.0](https://github.com/phucvinh57/fastify-template/compare/v1.3.0...v1.4.0) (2023-06-07)
 
 
