@@ -5,3 +5,4 @@ export const DUPLICATED_EMAIL = 'Email already exists !';
 export const LOGIN_FAIL = 'Incorrect login information !';
 export const MUST_LOGIN_FIRST = 'Login first !';
 export const INVALID_TOKEN = 'Invalid token !';
+export const NOT_FOUND_GENERIC = 'Not found !';

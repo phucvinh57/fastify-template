@@ -7,6 +7,7 @@ import { User } from '@prisma/client';
 import { AuthInputDto } from '@dtos/in';
 import { AuthResultDto } from '@dtos/out';
 import { Handler } from '@interfaces';
+import { logger } from '@utils';
 
 const login: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) => {
     const user = await prisma.user.findUnique({
@@ -42,6 +43,7 @@ const signup: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) 
             }
         });
     } catch (err) {
+        logger.info(err);
         return res.badRequest(DUPLICATED_EMAIL);
     }
 

@@ -1,11 +1,22 @@
-import { TRY_LATER } from '@constants';
+import { NOT_FOUND_GENERIC, TRY_LATER } from '@constants';
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
 
 export function customErrorHandler(err: FastifyError, _req: FastifyRequest, res: FastifyReply) {
-    if (err.statusCode === undefined || err.statusCode >= 500) {
+    if (err.statusCode === undefined) {
+        if (err.name === 'NotFoundError' || err.code === 'P2025') {
+            err.statusCode = 400;
+            err.message = NOT_FOUND_GENERIC;
+            return res.send(err);
+        }
+        err.statusCode = 500;
+    }
+
+    // Intentionally thrown errors
+    if (err.statusCode >= 500) {
         err.message = TRY_LATER;
         return res.send(err);
     }
+
     if (!err.validation || err.validation.length === 0) {
         return res.send(err);
     }

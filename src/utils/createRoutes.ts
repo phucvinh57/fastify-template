@@ -10,7 +10,7 @@ export function createRoutes(swaggerTag: HandlerTag, routesOptions: RouteOptions
                     tags: [swaggerTag]
                 },
                 /**
-                 * True by default. See https://www.fastify.io/docs/latest/Reference/Server/#exposeHeadRoutes
+                 * True by default. See https://www.fastify.dev/docs/latest/Reference/Server/#exposeHeadRoutes
                  * About HEAD http method: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD
                  */
                 exposeHeadRoute: false
