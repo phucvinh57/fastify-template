@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/phucvinh57/fastify-template/compare/v1.5.0...v1.6.0) (2023-08-22)
+
+
+### Features
+
+* **dtos:** migrate from `fluent-json-schema` to `@sinclair/typebox` ([ab84294](https://github.com/phucvinh57/fastify-template/commit/ab84294906cb022d185164e91f07e872ff881029))
+* **error handler:** catch more cases ([c746a39](https://github.com/phucvinh57/fastify-template/commit/c746a398788665c0be701a7daa81c9f3c595d85e))
+
 ## [1.5.0](https://github.com/phucvinh57/fastify-template/compare/v1.4.0...v1.5.0) (2023-08-07)
 
 
