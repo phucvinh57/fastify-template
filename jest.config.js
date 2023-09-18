@@ -39,6 +39,8 @@ module.exports = {
     transform: {
         '\\.(ts)$': 'ts-jest'
     },
+    transformIgnorePatterns: ['node_modules', 'dist'],
+    moduleDirectories: ['node_modules', 'src'],
     moduleNameMapper: {
         '@services': '<rootDir>/src/services',
         '@configs': '<rootDir>/src/configs',
@@ -50,7 +52,5 @@ module.exports = {
         '@routes': '<rootDir>/src/routes',
         '@utils': '<rootDir>/src/utils.ts'
     },
-    roots: ['<rootDir>'],
-    modulePaths: ['<rootDir>'],
-    moduleDirectories: ['node_modules']
+    roots: ['<rootDir>']
 };

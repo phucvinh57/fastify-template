@@ -5,7 +5,6 @@
         "outDir": "dist",
         "module": "CommonJS",
         "target": "ESNext",
-        "allowJs": true,
         "sourceMap": true,
         "declaration": false,
         "experimentalDecorators": true,
@@ -38,10 +37,11 @@
             "@utils": ["src/utils"],
             "@hooks": ["src/hooks"],
             "@routes": ["src/routes"],
-            "@interfaces": ["src/interfaces"]
+            "@interfaces": ["src/interfaces"],
+            "#package.json": ["./package.json"]
         }
     },
-    "include": ["src", "**/*.js", "**/*.ts", "test"],
+    "include": ["src", "**/*.js", "**/*.ts"],
     "exclude": ["node_modules", "dist", "coverage"],
     "linterOptions": {
         "exclude": []

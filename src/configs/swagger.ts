@@ -1,6 +1,6 @@
 import { FastifyDynamicSwaggerOptions } from '@fastify/swagger';
 import { FastifySwaggerUiOptions } from '@fastify/swagger-ui';
-import pkg from '../../package.json';
+import pkg from '#package.json';
 
 export const swaggerConfig: FastifyDynamicSwaggerOptions = {
     openapi: {
