@@ -12,4 +12,4 @@ const app = createServer({
     port: PORT
 });
 
-app.listen();
+app.start();
