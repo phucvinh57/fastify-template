@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.1](https://github.com/phucvinh57/fastify-template/compare/v1.6.0...v1.6.1) (2023-09-18)
+
+
+### Bug Fixes
+
+* **build product:** incorrect entry file path ([aa16608](https://github.com/phucvinh57/fastify-template/commit/aa16608bf7f2f18563ce793a5383693ed7b88901)), closes [#50](https://github.com/phucvinh57/fastify-template/issues/50)
+* **index.ts:** calling wrong method to start application ([c2ededa](https://github.com/phucvinh57/fastify-template/commit/c2ededa470cdbdd6eabec983773b85fccfed4964))
+* **project config:** missing linting & testing config ([289ea6a](https://github.com/phucvinh57/fastify-template/commit/289ea6af953ee147f65ceef378ddb330e976b177))
+
 ## [1.6.0](https://github.com/phucvinh57/fastify-template/compare/v1.5.0...v1.6.0) (2023-08-22)
 
 
