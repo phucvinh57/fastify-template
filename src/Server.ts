@@ -1,11 +1,12 @@
 import fastify, { FastifyInstance } from 'fastify';
 import type { FastifyCookieOptions } from '@fastify/cookie';
-import { CORS_WHITE_LIST, envs, loggerConfig, swaggerConfig, swaggerUIConfig } from '@configs';
+import { CORS_WHITE_LIST, envs, swaggerConfig, swaggerUIConfig } from '@configs';
 import { apiPlugin, authPlugin } from './routes';
 import { customErrorHandler } from '@handlers';
+import { logger } from '@utils';
 
 export function createServer(config: ServerConfig): FastifyInstance {
-    const app = fastify({ logger: loggerConfig[envs.NODE_ENV] });
+    const app = fastify({ logger });
 
     app.register(import('@fastify/sensible'));
     app.register(import('@fastify/helmet'));

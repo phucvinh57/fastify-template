@@ -3,5 +3,5 @@
  */
 
 export * from './env';
-export * from './logger';
 export * from './swagger';
+export * from './logger/discord';
