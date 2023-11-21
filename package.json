@@ -8,7 +8,7 @@
     "build": "tsc --project tsconfig.compile.json && tsc-alias",
     "barrels": "barrelsby --config .barrelsby.json -q",
     "start": "yarn barrels && cross-env NODE_ENV=development tsnd --ignore-watch node_modules --respawn --transpile-only --max-old-space-size=2048 -r tsconfig-paths/register src/index.ts",
-    "test": "cross-env NODE_ENV=test jest --passWithNoTests",
+    "test": "jest --passWithNoTests",
     "db:migrate": "npx prisma migrate dev",
     "db:reset": "npx prisma migrate reset --force",
     "db:deploy": "npx prisma migrate deploy",
@@ -33,10 +33,12 @@
     "@prisma/client": "^5.1.1",
     "@sinclair/typebox": "^0.31.1",
     "bcrypt": "^5.1.0",
+    "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "envalid": "^7.3.1",
     "fastify": "^4.21.0",
     "jsonwebtoken": "^9.0.1",
+    "moment-timezone": "^0.5.43",
     "prisma": "^5.1.1"
   },
   "devDependencies": {

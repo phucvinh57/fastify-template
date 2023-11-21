@@ -1,11 +1,21 @@
-import { NOT_FOUND_GENERIC, TRY_LATER } from '@constants';
+import { NOT_FOUND_GENERIC, PrismaErrCode, TRY_LATER } from '@constants';
+import { logger } from '@utils';
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
 
 export function customErrorHandler(err: FastifyError, _req: FastifyRequest, res: FastifyReply) {
+    // Errors occur in runtime
     if (err.statusCode === undefined) {
         if (err.name === 'NotFoundError' || err.code === 'P2025') {
             err.statusCode = 400;
             err.message = NOT_FOUND_GENERIC;
+            return res.send(err);
+        } else if (err.code === PrismaErrCode.UNIQUE_CONSTRAINT) {
+            err.statusCode = 400;
+            err.message = 'Unique constraint failed !';
+            return res.send(err);
+        } else if (err.code === PrismaErrCode.NOT_VALID_ID) {
+            err.statusCode = 400;
+            err.message = 'Not valid ID !';
             return res.send(err);
         }
         err.statusCode = 500;
@@ -14,6 +24,7 @@ export function customErrorHandler(err: FastifyError, _req: FastifyRequest, res:
     // Intentionally thrown errors
     if (err.statusCode >= 500) {
         err.message = TRY_LATER;
+        logger.warn(err);
         return res.send(err);
     }
 

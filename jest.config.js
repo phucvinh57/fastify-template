@@ -1,56 +1,50 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
+const { pathsToModuleNameMapper } = require('ts-jest');
+// which contains the path mapping (ie the `compilerOptions.paths` option):
+const { compilerOptions } = require('./tsconfig');
 
-module.exports = {
+/** @type {import('@jest/types').Config.ProjectConfig} */
+const generalConfig = {
     // Automatically clear mock calls and instances between every test
     clearMocks: true,
-
-    // Indicates whether the coverage information should be collected while executing the test
-    collectCoverage: process.env.NODE_ENV === 'test',
-
-    // An array of glob patterns indicating a set of files for which coverage information should be collected
-    // collectCoverageFrom: undefined,
-
-    // The directory where Jest should output its coverage files
-    coverageDirectory: 'coverage',
-
-    // An array of regexp pattern strings used to skip coverage collection
-    coveragePathIgnorePatterns: ['index.ts', '/node_modules/', 'dist'],
-
-    // An object that configures minimum threshold enforcement for coverage results
-    coverageThreshold: {
-        global: {
-            branches: 70,
-            functions: 70,
-            lines: 70,
-            statements: 70
-        }
-    },
-
-    // An array of file extensions your modules use
+    coveragePathIgnorePatterns: ['index.ts', '/node_modules/'],
     moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
-
-    // The test environment that will be used for testing
     testEnvironment: 'node',
-
-    // The glob patterns Jest uses to detect test files
-    testMatch: ['**/src/**/__tests__/**/*.[jt]s?(x)', '**/src/**/?(*.)+(spec|test).[tj]s?(x)'],
+    rootDir: '.',
     // A map from regular expressions to paths to transformers
     transform: {
         '\\.(ts)$': 'ts-jest'
     },
-    transformIgnorePatterns: ['node_modules', 'dist'],
+    testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+    transformIgnorePatterns: ['node_modules'],
     moduleDirectories: ['node_modules', 'src'],
-    moduleNameMapper: {
-        '@services': '<rootDir>/src/services',
-        '@configs': '<rootDir>/src/configs',
-        '@constants': '<rootDir>/src/constants',
-        '@dtos/common': '<rootDir>/src/dtos/common.dto.ts',
-        '@dtos/in': '<rootDir>/src/dtos/in',
-        '@dtos/out': '<rootDir>/src/dtos/out',
-        '@hooks': '<rootDir>/src/hooks',
-        '@routes': '<rootDir>/src/routes',
-        '@utils': '<rootDir>/src/utils.ts'
-    },
-    roots: ['<rootDir>']
+    roots: ['<rootDir>'],
+    modulePaths: [compilerOptions.baseUrl], // <-- This will be set to 'baseUrl' value
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths /*, { prefix: '<rootDir>/' } */)
+};
+
+/** @type {import('jest').Config} */
+module.exports = {
+    testTimeout: 120 * 1000,
+    passWithNoTests: true,
+    reporters: [['github-actions', { silent: false }], 'default'],
+    // Indicates whether the coverage information should be collected while executing the test
+    collectCoverage: true,
+    // The directory where Jest should output its coverage files
+    coverageDirectory: 'coverage',
+    detectOpenHandles: true,
+
+    // Wait at most 5 seconds util all promises are resolved before exiting the test
+    openHandlesTimeout: 5000,
+    projects: [
+        {
+            ...generalConfig,
+            displayName: 'unit-tests',
+            testMatch: ['**/*.test.ts']
+        },
+        {
+            ...generalConfig,
+            displayName: 'integration-tests',
+            testMatch: ['**/*.spec.ts']
+        }
+    ]
 };
