@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/phucvinh57/fastify-template/compare/v1.6.1...v1.7.0) (2023-11-21)
+
+
+### Features
+
+* **logger:** integrate with discord webhook ([260e991](https://github.com/phucvinh57/fastify-template/commit/260e991b8ba1d1302125d78f98e6b1a6f7b447c7))
+
+
+### Performance Improvements
+
+* **request:** decorate user object for each request ([30e6fdb](https://github.com/phucvinh57/fastify-template/commit/30e6fdb655a56e068f6edc89fff329db71bfc09d))
+
 ## [1.6.1](https://github.com/phucvinh57/fastify-template/compare/v1.6.0...v1.6.1) (2023-09-18)
 
 
