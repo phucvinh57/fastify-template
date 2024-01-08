@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - '.husky/**'
       - '**.md'
+      - 'docs/**'
       - 'package.json'
   
 jobs:
@@ -15,24 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [19.x]
+        node-version: [18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v3
         name: Checkout repository
-        
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
+         
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -40,10 +29,10 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: yarn && yarn db:generate
 
-      - name: Test
-        run: yarn lint && yarn test
+      - name: Run unit tests
+        run: yarn test unit
 
       - name: Build
         run: yarn build

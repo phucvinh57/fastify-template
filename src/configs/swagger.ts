@@ -1,14 +1,13 @@
 import { FastifyDynamicSwaggerOptions } from '@fastify/swagger';
 import { FastifySwaggerUiOptions } from '@fastify/swagger-ui';
-import pkg from '#package.json';
 
 export const swaggerConfig: FastifyDynamicSwaggerOptions = {
     openapi: {
         info: {
-            title: pkg.name,
-            version: pkg.version,
+            title: '<Your project name>',
+            version: '1.0.0',
             license: { name: 'ISC' },
-            summary: pkg.description
+            summary: '<Your project summary>'
         },
         externalDocs: {
             url: 'https://swagger.io',
@@ -19,8 +18,6 @@ export const swaggerConfig: FastifyDynamicSwaggerOptions = {
 
 export const swaggerUIConfig: FastifySwaggerUiOptions = {
     routePrefix: '/docs',
-    uiConfig: {
-        deepLinking: false
-    },
+    uiConfig: { deepLinking: false },
     staticCSP: false
 };

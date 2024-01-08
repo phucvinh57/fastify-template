@@ -19,8 +19,8 @@ export function createServer(config: ServerConfig): FastifyInstance {
         hook: 'onRequest'
     } as FastifyCookieOptions);
 
-    // Swagger on production will be turned off in the future
-    if (envs.isDev) {
+    // Swagger on production should be turned off
+    if (!envs.isProd) {
         app.register(import('@fastify/swagger'), swaggerConfig);
         app.register(import('@fastify/swagger-ui'), swaggerUIConfig);
     }
@@ -42,7 +42,7 @@ export function createServer(config: ServerConfig): FastifyInstance {
         await app.ready();
         if (!envs.isProd) {
             app.swagger({ yaml: true });
-            app.log.info(`Swagger documentation is on http://${config.host}:${config.port}/docs`);
+            app.log.info(`Swagger documentation is on ${app.server.address()}/docs`);
         }
     };
 

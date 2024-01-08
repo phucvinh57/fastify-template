@@ -30,7 +30,7 @@
             "@services": ["src/services"],
             "@dtos/in": ["src/dtos/in"],
             "@dtos/out": ["src/dtos/out"],
-            "@dtos/common": ["src/dtos/common.dto"],
+            "@dtos/common": ["src/dtos/common"],
             "@configs": ["src/configs"],
             "@configs/*": ["src/configs/*"],
             "@repositories": ["src/repositories"],
@@ -38,7 +38,7 @@
             "@hooks": ["src/hooks"],
             "@routes": ["src/routes"],
             "@interfaces": ["src/interfaces"],
-            "#package.json": ["./package.json"]
+            "@testUtils": ["src/setupTest"]
         }
     },
     "include": ["src", "**/*.js", "**/*.ts"],
