@@ -16,14 +16,14 @@ Using [fastify](https://www.fastify.io), this template includes:
 
 For applying conventional commits, refer [commitizen](https://github.com/commitizen/cz-cli).
 
-## Prerequisites
+## 1. Prerequisites
 
 - `docker` v20.10.22
 - `docker-compose` v1.29.2
 - `node` v18.13.0
 - `npm` 8.19.3
 
-## Commands
+## 2. Commands
 
 Note: Fill in `.env` file (use template from `.env.example`) before starts.
 
@@ -40,8 +40,9 @@ Note: Fill in `.env` file (use template from `.env.example`) before starts.
 - `yarn start:docker`: Run `docker-compose.dev.yml` file to set up local database
 - `yarn clean:docker`: Remove local database instance include its data.
 - `yarn clean:git`: Clean local branches which were merged on remote
+- `yarn test <test_label>`: Run test with label `<test_label>`. For example: `yarn test auth` will run all tests in `auth.test.ts` or `auth.spec.ts` file.
 
-## Project structure
+## 3. Project structure
 
 ```py
 📦prisma
@@ -66,7 +67,25 @@ Note: Fill in `.env` file (use template from `.env.example`) before starts.
  ┗ 📜index.ts       # Program entry
 ```
 
-## Project configurations
+## 4. Appendix
+
+This section contains some useful information for development.
+
+### Testing
+
+These are some best practices for testing and overall quality:
+
+1. At the very least, write API (component) testing.
+2. Include 3 parts in each test name
+3. Structure tests by the AAA pattern
+4. Ensure Node version is unified
+5. Avoid global test fixtures and seeds, add data per-test
+6. Check your test coverage, it helps to identify wrong test patterns
+7. Refactor regularly using static analysis tools
+8. Mock responses of external HTTP services
+9. Test your middlewares in isolation
+10. Specify a port in production, randomize in testing
+11. Test the five possible outcomes
 
 ### Code linting & formating
 
@@ -132,15 +151,13 @@ yarn barrels
 
 To avoid using many `..` in relative path, config path alias in `tsconfig.json`. See the guideline [here](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping).
 
-## Git working culture
+### Git working culture
 
 - For every updates, DO NOT push directly to `master` branch. Create a new branch, commit, publish branch and create a pull request (PR) instead.
 - A branch should have prefix `feat/` for a feature update, prefix `hotf/` for a hotfix, `improv/` for an improvement ...
 - A PR should be small enough to review. To split a large PR, use [stacked PRs](https://blog.logrocket.com/using-stacked-pull-requests-in-github/).
 
-## Helpful resources
-
-### Prisma
+### About Prisma ORM
 
 - [Database schema](https://www.prisma.io/docs/concepts/components/prisma-schema)
 - [Type mapping Prisma & PostgreSQL](https://www.prisma.io/docs/concepts/database-connectors/postgresql#type-mapping-between-postgresql-to-prisma-schema)
