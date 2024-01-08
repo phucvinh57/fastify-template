@@ -1,4 +1,4 @@
-type LogLevel = 'INFO' | 'WARN' | 'DEBUG' | 'ERROR' | 'FATAL';
+type LogLevel = 'TRACE' | 'INFO' | 'WARN' | 'DEBUG' | 'ERROR' | 'FATAL';
 
 type DiscordLogOptions = {
     webhookUrl: string;

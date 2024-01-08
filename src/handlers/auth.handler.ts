@@ -1,13 +1,11 @@
 import { compare, hash } from 'bcrypt';
 import { prisma } from '@repositories';
-import { cookieOptions, DUPLICATED_EMAIL, LOGIN_FAIL, SALT_ROUNDS, USER_NOT_FOUND } from '@constants';
+import { cookieOptions, LOGIN_FAIL, SALT_ROUNDS, USER_NOT_FOUND } from '@constants';
 import jwt from 'jsonwebtoken';
 import { envs } from '@configs';
-import { User } from '@prisma/client';
 import { AuthInputDto } from '@dtos/in';
 import { AuthResultDto } from '@dtos/out';
 import { Handler } from '@interfaces';
-import { logger } from '@utils';
 
 const login: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) => {
     const user = await prisma.user.findUnique({
@@ -34,18 +32,12 @@ const login: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) =
 
 const signup: Handler<AuthResultDto, { Body: AuthInputDto }> = async (req, res) => {
     const hashPassword = await hash(req.body.password, SALT_ROUNDS);
-    let user: User;
-    try {
-        user = await prisma.user.create({
-            data: {
-                email: req.body.email,
-                password: hashPassword
-            }
-        });
-    } catch (err) {
-        logger.info(err);
-        return res.badRequest(DUPLICATED_EMAIL);
-    }
+    const user = await prisma.user.create({
+        data: {
+            email: req.body.email,
+            password: hashPassword
+        }
+    });
 
     const userToken = jwt.sign({ userId: user.id }, envs.JWT_SECRET);
     res.setCookie('token', userToken, cookieOptions);

@@ -38,7 +38,7 @@
             "@hooks": ["src/hooks"],
             "@routes": ["src/routes"],
             "@interfaces": ["src/interfaces"],
-            "#package.json": ["./package.json"]
+            "@testUtils": ["src/setupTest"]
         }
     },
     "include": ["src", "**/*.js", "**/*.ts"],

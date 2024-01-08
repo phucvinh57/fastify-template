@@ -4,9 +4,9 @@
 
 Using [fastify](https://www.fastify.io), this template includes:
 
-- API Docs: `SwaggerUI`
-- Input validation: `fluent-json-schema`
-- ORM & migration tools: `Prisma`
+- API Docs: `Swagger UI`
+- Input definition: [`Typebox`](https://github.com/sinclairzx81/typebox)
+- ORM: `Prisma`
 - Deployment:
   - Dockerfile & docker-compose files
   - Script CI/CD in `.github/workflows`
@@ -53,10 +53,10 @@ Note: Fill in `.env` file (use template from `.env.example`) before starts.
  ┣ 📂constants      # Constants and enums go here
  ┣ 📂dtos           # Schema for input (from requests) & output (from responses)
  ┃ ┣ 📂in
- ┃ ┗ 📂out
+ ┃ ┣ 📂out
+ ┃ ┗ 📂common           # Reusable schemas
  ┣ 📂handlers       # Handlers, which are responsible for handling core business logic
  ┣ 📂interfaces     # Interfaces
- ┣ 📂middlewares    # Middlewares such as logging or verifying tokens
  ┣ 📂plugins        # Plugin, in charge of organizing api routings & registering middleware
  ┣ 📂repositories   # Datasource configurations & connections. Could have more than one datasource.
  ┣ 📂services       # 3rd-party services or business logic services

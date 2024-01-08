@@ -1,4 +1,4 @@
 type ServerConfig = {
     host: string;
-    port: number;
+    port?: number;
 };

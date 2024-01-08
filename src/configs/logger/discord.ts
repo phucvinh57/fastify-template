@@ -17,10 +17,12 @@ export default function (options: DiscordLogOptions) {
         for await (const obj of source) {
             const level = obj.level;
             let levelName: LogLevel;
-            if (level >= 60) levelName = 'FATAL';
-            else if (level >= 50) levelName = 'ERROR';
-            else if (level >= 40) levelName = 'WARN';
-            else levelName = 'INFO';
+            if (level === 60) levelName = 'FATAL';
+            else if (level === 50) levelName = 'ERROR';
+            else if (level === 40) levelName = 'WARN';
+            else if (level === 30) levelName = 'INFO';
+            else if (level === 20) levelName = 'DEBUG';
+            else levelName = 'TRACE';
 
             if (ignoreFields) ignoreFields.forEach((field) => delete obj[field]);
             const time = moment.tz('Asia/Ho_Chi_Minh').format('HH:mm:ss DD/MM/YYYY');
