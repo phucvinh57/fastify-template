@@ -4,6 +4,7 @@
         "./src/constants",
         "./src/dtos/in",
         "./src/dtos/out",
+        "./src/dtos/common",
         "./src/configs",
         "./src/hooks",
         "./src/interfaces",
