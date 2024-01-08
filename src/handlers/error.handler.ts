@@ -34,7 +34,8 @@ export function customErrorHandler(err: FastifyError, _req: FastifyRequest, res:
 
     const validation = err.validation[0];
     if (validation.keyword === 'required') {
-        err.message = `${validation.params.missingProperty[0].toUpperCase() + validation.params.missingProperty.slice(1)} is required !`;
+        const missingProperty = validation.params.missingProperty as string;
+        err.message = `${missingProperty[0].toUpperCase() + missingProperty.slice(1)} is required !`;
         return res.send(err);
     }
     // Error occurs on PathParams
