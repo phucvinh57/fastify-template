@@ -58,7 +58,7 @@ jobs:
           
   release:
     name: Release
-    # needs: [test]
+    needs: [test]
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
