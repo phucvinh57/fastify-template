@@ -1,0 +1,38 @@
+{
+  "branches": [
+    "'+([0-9])?(.{+([0-9]),x}).x'",
+    "master",
+    {
+      "name": "staging",
+      "prerelease": "rc"
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/github",
+      {
+        "successComment": "New release was published 🎉",
+        "failComment": "Release failed 🚨"
+      }
+    ],
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "package.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} on ${branch.name} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

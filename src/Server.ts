@@ -1,6 +1,6 @@
 import fastify, { FastifyInstance } from 'fastify';
 import type { FastifyCookieOptions } from '@fastify/cookie';
-import { CORS_WHITE_LIST, envs, swaggerConfig, swaggerUIConfig } from '@configs';
+import { envs, swaggerConfig, swaggerUIConfig } from '@configs';
 import { apiPlugin, authPlugin } from './routes';
 import { customErrorHandler } from '@handlers';
 import { logger } from '@utils';
@@ -11,7 +11,7 @@ export function createServer(config: ServerConfig): FastifyInstance {
     app.register(import('@fastify/sensible'));
     app.register(import('@fastify/helmet'));
     app.register(import('@fastify/cors'), {
-        origin: CORS_WHITE_LIST
+        origin: envs.CORS_WHITE_LIST
     });
 
     app.register(import('@fastify/cookie'), {
@@ -42,7 +42,10 @@ export function createServer(config: ServerConfig): FastifyInstance {
         await app.ready();
         if (!envs.isProd) {
             app.swagger({ yaml: true });
-            app.log.info(`Swagger documentation is on ${app.server.address()}/docs`);
+            const addr = app.server.address();
+            if (!addr) return;
+            const swaggerPath = typeof addr === 'string' ? addr : `http://${addr.address}:${addr.port}`;
+            app.log.info(`Swagger documentation is on ${swaggerPath}/docs`);
         }
     };
 
