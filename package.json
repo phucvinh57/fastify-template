@@ -1,6 +1,6 @@
 {
   "name": "fastify-template",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0",
   "license": "ISC",
   "repository": "git@github.com:phucvinh57/fastify-template.git",
   "description": "",
