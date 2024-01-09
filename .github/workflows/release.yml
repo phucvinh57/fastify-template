@@ -38,7 +38,10 @@ jobs:
         run: yarn && yarn db:generate
 
       - name: Setup environment
-        run: yarn start:docker && yarn db:migrate
+        run:
+          env > .env
+          echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5432/${{ env.POSTGRES_DB }}?schema=public" >> .env
+          yarn start:docker && yarn db:migrate
 
       - name: Run tests
         run:
