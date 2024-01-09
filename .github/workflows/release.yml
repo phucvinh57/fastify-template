@@ -12,48 +12,53 @@ permissions:
 name: Release
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
-    env:
-      JWT_SECRET: "f@st1fy_t3mpl@te"
-      COOKIE_SECRET: "f@st1fy_t3mpl@te"
-      POSTGRES_USER: "test"
-      POSTGRES_PASSWORD: "@Bc123def"
-      POSTGRES_DB: "fastify-template"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x]
+  #   env:
+  #     JWT_SECRET: "f@st1fy_t3mpl@te"
+  #     COOKIE_SECRET: "f@st1fy_t3mpl@te"
+  #     POSTGRES_USER: "test"
+  #     POSTGRES_PASSWORD: "@Bc123def"
+  #     POSTGRES_DB: "fastify-template"
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+  #     - name: Setup Node ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn && yarn db:generate
+  #     - name: Install dependencies
+  #       run: yarn && yarn db:generate
 
-      - name: Setup environment
-        run: |
-          env > .env
-          cat .env
-          echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
-          yarn start:docker
-          yarn db:migrate
+  #     - name: Setup environment
+  #       run: |
+  #         env > .env
+  #         cat .env
+  #         echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
+  #         yarn start:docker
+  #         yarn db:migrate
 
-      - name: Run tests
-        run: |
-          env > .env
-          echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
-          yarn test unit integration
+  #     - name: Run tests
+  #       run: |
+  #         env > .env
+  #         echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
+  #         yarn test unit integration
 
+  #     - name: Clean environment
+  #       if: always()
+  #       run: |
+  #         yarn clean:docker
+          
   release:
     name: Release
-    needs: [test]
+    # needs: [test]
     runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release

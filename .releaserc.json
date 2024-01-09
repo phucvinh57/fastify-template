@@ -13,7 +13,7 @@
     [
       "@semantic-release/github",
       {
-        "successComment": "Release is at ${releases[2].url} 🎉",
+        "successComment": "New release was published 🎉",
         "failComment": "Release failed 🚨"
       }
     ],
