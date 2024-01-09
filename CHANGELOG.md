@@ -1,3 +1,10 @@
+# [1.0.0-rc.3](https://github.com/phucvinh57/fastify-template/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2024-01-09)
+
+
+### Bug Fixes
+
+* package.json version not update automatically ([ccbf88e](https://github.com/phucvinh57/fastify-template/commit/ccbf88e90c91b481ac73962edeac446e471f386a))
+
 # [1.0.0-rc.2](https://github.com/phucvinh57/fastify-template/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2024-01-09)
 
 
