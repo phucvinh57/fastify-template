@@ -42,7 +42,10 @@ export function createServer(config: ServerConfig): FastifyInstance {
         await app.ready();
         if (!envs.isProd) {
             app.swagger({ yaml: true });
-            app.log.info(`Swagger documentation is on ${app.server.address()}/docs`);
+            const addr = app.server.address();
+            if (!addr) return;
+            const swaggerPath = typeof addr === 'string' ? addr : `http://${addr.address}:${addr.port}`;
+            app.log.info(`Swagger documentation is on ${swaggerPath}/docs`);
         }
     };
 

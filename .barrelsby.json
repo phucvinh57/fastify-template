@@ -11,6 +11,13 @@
         "./src/repositories",
         "./src/utils"
     ],
-    "exclude": ["__mock__", "__mocks__", ".spec.ts"],
+    "exclude": [
+        "__mock__",
+        "__mocks__",
+        ".spec.ts",
+        ".test.ts",
+        "dist",
+        "coverage"
+    ],
     "delete": true
 }
