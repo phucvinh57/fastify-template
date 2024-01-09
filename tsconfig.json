@@ -41,7 +41,7 @@
             "@testUtils": ["src/setupTest"]
         }
     },
-    "include": ["src", "**/*.js", "**/*.ts"],
+    "include": ["src", "**/*.js", "**/*.ts", ".commitlintrc"],
     "exclude": ["node_modules", "dist", "coverage"],
     "linterOptions": {
         "exclude": []
