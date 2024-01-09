@@ -3,6 +3,10 @@ on:
     branches:
       - master
       - staging
+    paths-ignore:
+      - '.husky/**'
+      - '**.md'
+      - package.json
 
 permissions:
   contents: write
