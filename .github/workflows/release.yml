@@ -38,13 +38,15 @@ jobs:
         run: yarn && yarn db:generate
 
       - name: Setup environment
-        run:
+        run: |
           env > .env
+          cat .env
           echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
-          yarn start:docker && yarn db:migrate
+          yarn start:docker
+          yarn db:migrate
 
       - name: Run tests
-        run:
+        run: |
           env > .env
           echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5433/${{ env.POSTGRES_DB }}?schema=public" >> .env
           yarn test unit integration
