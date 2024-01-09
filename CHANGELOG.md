@@ -1,3 +1,10 @@
+# [1.0.0-rc.2](https://github.com/phucvinh57/fastify-template/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2024-01-09)
+
+
+### Bug Fixes
+
+* github release error due to incorrect `successComment` message ([f14082b](https://github.com/phucvinh57/fastify-template/commit/f14082bbecadf02000ff3addf98f5268b331077a))
+
 # 1.0.0-rc.1 (2024-01-09)
 
 
