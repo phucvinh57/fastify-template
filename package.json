@@ -5,6 +5,7 @@
   "repository": "git@github.com:phucvinh57/fastify-template.git",
   "description": "",
   "type": "commonjs",
+  "private": true,
   "scripts": {
     "prepare": "is-ci || husky install",
     "bootstrap": "yarn start:docker && yarn && yarn db:migrate && npx prisma db seed",
