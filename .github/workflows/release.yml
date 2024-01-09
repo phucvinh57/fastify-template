@@ -18,7 +18,12 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-
+    env:
+      JWT_SECRET: "f@st1fy_t3mpl@te"
+      COOKIE_SECRET: "f@st1fy_t3mpl@te"
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "@Bc123def"
+      POSTGRES_DB: "fastify-template"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,7 +41,10 @@ jobs:
         run: yarn start:docker && yarn db:migrate
 
       - name: Run tests
-        run: yarn test unit integration
+        run:
+          env > .env
+          echo "POSTGRES_URL=postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5432/${{ env.POSTGRES_DB }}?schema=public" >> .env
+          yarn test unit integration
 
   release:
     name: Release
@@ -47,6 +55,7 @@ jobs:
       issues: write # to be able to comment on released issues
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3

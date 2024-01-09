@@ -29,22 +29,35 @@ const pinoLogTarget = {
         ignore: 'pid,hostname'
     }
 };
-const discordLogTarget = {
-    target: '../configs/logger/discord',
-    level: 'warn',
-    options: {
-        webhookUrl: envs.DISCORD_WEBHOOK_URL,
-        ignore: 'time, pid, hostname'
-    } as DiscordLogOptions
-};
+const discordLogTarget =
+    envs.DISCORD_WEBHOOK_URL.length > 0
+        ? {
+              target: '../configs/logger/discord',
+              level: 'warn',
+              options: {
+                  webhookUrl: envs.DISCORD_WEBHOOK_URL,
+                  ignore: 'time, pid, hostname'
+              } as DiscordLogOptions
+          }
+        : null;
+
+type TransportTarget = pino.TransportTargetOptions<Record<string, unknown>>;
+
+const devTransportTargets: TransportTarget[] = [pinoLogTarget];
+const prodTransportTargets: TransportTarget[] = fileLogTargets;
+
+if (discordLogTarget) {
+    devTransportTargets.push(discordLogTarget);
+    prodTransportTargets.push(discordLogTarget);
+}
 
 const loggerConfig: Record<NodeEnv, PinoLoggerOptions> = {
     development: {
-        transport: { targets: [pinoLogTarget, discordLogTarget] },
+        transport: { targets: devTransportTargets },
         serializers: { err: errorSerialize }
     },
     production: {
-        transport: { targets: [discordLogTarget, ...fileLogTargets] },
+        transport: { targets: prodTransportTargets },
         serializers: { err: errorSerialize }
     },
     test: { serializers: { err: errorSerialize } }

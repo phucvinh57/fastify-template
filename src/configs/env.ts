@@ -1,5 +1,5 @@
 import { config as configEnv } from 'dotenv';
-import { str, cleanEnv } from 'envalid';
+import { str, cleanEnv, json } from 'envalid';
 
 configEnv();
 
@@ -10,8 +10,8 @@ export const envs = cleanEnv(process.env, {
     }),
     JWT_SECRET: str(),
     COOKIE_SECRET: str(),
-    CORS_WHITE_LIST: str(),
-    DISCORD_WEBHOOK_URL: str()
+    CORS_WHITE_LIST: json<string[]>({
+        default: ['http://localhost:3000', 'http://localhost:8080']
+    }),
+    DISCORD_WEBHOOK_URL: str({ default: '' })
 });
-
-export const CORS_WHITE_LIST = envs.CORS_WHITE_LIST.split(',');
